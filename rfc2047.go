@@ -50,11 +50,12 @@ func main() {
 		stdin := bufio.NewScanner(os.Stdin)
 
 		for stdin.Scan() {
+			input := strings.TrimSpace(stdin.Text())
 			if *dec {
-				fmt.Println(decode(stdin.Text()))
+				fmt.Println(decode(input))
 				continue
 			}
-			fmt.Println(encode(stdin.Text()))
+			fmt.Println(encode(input))
 		}
 		if err := stdin.Err(); err != nil {
 			fmt.Println(err)
@@ -63,11 +64,13 @@ func main() {
 		return
 	}
 
+	input := strings.TrimSpace(os.Args[len(os.Args)-1])
 	if *dec {
-		fmt.Println(decode(os.Args[len(os.Args)-1]))
+		fmt.Println(decode(input))
 		return
 	}
-	fmt.Println(encode(os.Args[len(os.Args)-1]))
+	encode(input)
+	fmt.Println(encode(input))
 }
 
 func encode(input string) string {
